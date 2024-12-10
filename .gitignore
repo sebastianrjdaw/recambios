@@ -1,0 +1,15 @@
+# Ignorar configuración y directorios temporales
+wp-config.php
+*.log
+*.sql
+
+# Ignorar contenido subido por usuarios
+wp-content/uploads/
+
+# Ignorar plugins y temas externos instalados manualmente
+wp-content/plugins/
+wp-content/themes/
+
+# Ignorar carpetas y archivos del servidor
+node_modules/
+vendor/
