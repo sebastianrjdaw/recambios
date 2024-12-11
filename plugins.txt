@@ -1,0 +1,7 @@
+woocommerce
+woocommerce-gateway-stripe
+redsys-gateway-for-woocommerce
+seo-by-rank-math
+wp-mail-smtp
+litespeed-cache
+updraftplus

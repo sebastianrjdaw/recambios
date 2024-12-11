@@ -1,4 +1,5 @@
 <?php
+define( 'WP_CACHE', true );
 /**
  * The base configuration for WordPress
  *
@@ -75,14 +76,14 @@ define( 'DB_COLLATE', getenv_docker('WORDPRESS_DB_COLLATE', '') );
  *
  * @since 2.6.0
  */
-define( 'AUTH_KEY',         getenv_docker('WORDPRESS_AUTH_KEY',         '04915947ef876072cfedebfeb4c56a8e66e49d4b') );
-define( 'SECURE_AUTH_KEY',  getenv_docker('WORDPRESS_SECURE_AUTH_KEY',  '6ed8c41b6f632215cb1856f1f655113308ca0ef0') );
-define( 'LOGGED_IN_KEY',    getenv_docker('WORDPRESS_LOGGED_IN_KEY',    'b0dd30f590f528e4c34c9c83438c7f26431d9224') );
-define( 'NONCE_KEY',        getenv_docker('WORDPRESS_NONCE_KEY',        '67abbf6c071da8415e6f77ca9959de22caa19284') );
-define( 'AUTH_SALT',        getenv_docker('WORDPRESS_AUTH_SALT',        '29c8763261a7bba5c900cec0ca48b9c535c83a07') );
-define( 'SECURE_AUTH_SALT', getenv_docker('WORDPRESS_SECURE_AUTH_SALT', '2c0c489569a71dab4b7c53e0d4c2894580c99631') );
-define( 'LOGGED_IN_SALT',   getenv_docker('WORDPRESS_LOGGED_IN_SALT',   '4b20828118c5921189f7d1a55b12f94f18f749f1') );
-define( 'NONCE_SALT',       getenv_docker('WORDPRESS_NONCE_SALT',       '2969c33c2b968a4a733af574a30dba4d1020b4a4') );
+define( 'AUTH_KEY',         getenv_docker('WORDPRESS_AUTH_KEY',         '50e07db6551020c9b8f3eabcde2bddf559f8b112') );
+define( 'SECURE_AUTH_KEY',  getenv_docker('WORDPRESS_SECURE_AUTH_KEY',  '1dd330958cbde4d2f7735b411b12de25e10f9a13') );
+define( 'LOGGED_IN_KEY',    getenv_docker('WORDPRESS_LOGGED_IN_KEY',    'd8a60614fd90ac554d6872d018efe7070b452459') );
+define( 'NONCE_KEY',        getenv_docker('WORDPRESS_NONCE_KEY',        '70c9d79c0e41f584d98baec53f5cddbecd3a3dcd') );
+define( 'AUTH_SALT',        getenv_docker('WORDPRESS_AUTH_SALT',        'c770a13879c533e54add3a23cf877bb1661a3821') );
+define( 'SECURE_AUTH_SALT', getenv_docker('WORDPRESS_SECURE_AUTH_SALT', 'ac6c3ab06258df5c53ad91b9702097bd68fedf70') );
+define( 'LOGGED_IN_SALT',   getenv_docker('WORDPRESS_LOGGED_IN_SALT',   'cab2c95a100d4ba32fd09f2a2b59d4f2b8f065f9') );
+define( 'NONCE_SALT',       getenv_docker('WORDPRESS_NONCE_SALT',       'd00ec419b0714e6df0ec80f2005b7922f17813c3') );
 // (See also https://wordpress.stackexchange.com/a/152905/199287)
 
 /**#@-*/

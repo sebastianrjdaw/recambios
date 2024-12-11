@@ -1,15 +1,25 @@
-# Ignorar configuración y directorios temporales
-wp-config.php
-*.log
-*.sql
-
-# Ignorar contenido subido por usuarios
-wp-content/uploads/
-
-# Ignorar plugins y temas externos instalados manualmente
-wp-content/plugins/
-wp-content/themes/
-
-# Ignorar carpetas y archivos del servidor
+# Node and Composer dependencies
 node_modules/
 vendor/
+
+# Docker files
+db_data/
+wordpress/
+*.sql
+
+# WordPress-specific files
+wp-content/uploads/
+wp-content/cache/
+wp-config.php.local
+
+# Editor files
+*.swp
+*.swo
+
+# Logs and temp files
+*.log
+*.tmp
+
+# OS files
+.DS_Store
+Thumbs.db
