@@ -1,7 +1,35 @@
 #!/bin/bash
 
 # --- setup.sh ---
-# Este script configura el entorno inicial de WordPress usando Docker.
+# Este script limpia el entorno, configura WordPress usando Docker y realiza una instalación limpia.
+
+# Función para limpiar archivos y carpetas innecesarias
+clean_project() {
+  echo "Limpiando archivos innecesarios del proyecto..."
+
+  # Eliminar caché y archivos temporales
+  rm -rf wordpress/wp-content/cache/*
+  rm -rf wordpress/wp-content/uploads/sessions/*
+  find wordpress/wp-content/ -type f -name "*.log" -delete
+  find wordpress/wp-content/ -type f -name "*.tmp" -delete
+
+  # Eliminar datos de la base de datos si existen
+  if [ -d "db_data" ]; then
+    echo "Eliminando datos antiguos de la base de datos..."
+    rm -rf db_data/*
+  fi
+
+  # Eliminar archivos SQL antiguos en el proyecto
+  find . -type f -name "*.sql" -delete
+
+  # Eliminar configuraciones sensibles antiguas
+  if [ -f "wordpress/wp-config.php" ]; then
+    echo "Eliminando archivo wp-config.php..."
+    rm -f wordpress/wp-config.php
+  fi
+
+  echo "Limpieza completada."
+}
 
 # Cargar variables del archivo .env
 if [ -f .env ]; then
@@ -12,8 +40,12 @@ else
   exit 1
 fi
 
+# Ejecutar la limpieza del proyecto
+clean_project
+
 # Inicia los contenedores Docker
 echo "Iniciando los contenedores..."
+docker-compose down
 docker-compose up -d
 
 # Espera a que el contenedor de WordPress esté listo
@@ -37,18 +69,22 @@ else
 fi
 
 # Instala y activa plugins desde plugins.txt
-echo "Instalando y activando plugins..."
-while IFS= read -r plugin; do
-  docker exec wordpress_app wp plugin install "$plugin" --activate --allow-root
-done < plugins.txt
-
-# Importa la base de datos, si existe
-if [ -f ./db_data/db.sql ]; then
-  echo "Importando base de datos..."
-  docker exec wordpress_app wp db import /var/www/html/db_data/db.sql --allow-root
-  echo "Base de datos importada con éxito."
+if [ -f plugins.txt ]; then
+  echo "Instalando y activando plugins..."
+  while IFS= read -r plugin; do
+    docker exec wordpress_app wp plugin install "$plugin" --activate --allow-root
+  done < plugins.txt
 else
-  echo "No se encontró el archivo db.sql. Continuando sin importar la base de datos."
+  echo "No se encontró el archivo plugins.txt. Continuando sin instalar plugins."
 fi
 
-echo "Configuración inicial completa. Accede a $WORDPRESS_URL para empezar."
+# Importa la base de datos si existe un backup
+if [ -f db_data/backup_wp.sql ]; then
+  echo "Importando base de datos..."
+  docker exec -i wordpress_db mysql -u root -proot_password wp_database < db_data/backup_wp.sql
+  echo "Base de datos importada con éxito."
+else
+  echo "No se encontró el archivo backup_wp.sql. Continuando sin importar la base de datos."
+fi
+
+echo "Configuración inicial completada. Accede a $WORDPRESS_URL para empezar."

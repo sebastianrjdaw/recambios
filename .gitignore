@@ -1,25 +1,16 @@
-# Node and Composer dependencies
-node_modules/
-vendor/
-
-# Docker files
+# Datos de la base de datos
 db_data/
-wordpress/
+
+# Archivos temporales y caché
+wordpress/wp-content/cache/
+wordpress/wp-content/uploads/sessions/
+wordpress/wp-content/uploads/*.tmp
+wordpress/wp-content/uploads/*.log
+
+# Archivos de configuración sensibles
+wordpress/wp-config.php
+.env
+
+# Backups antiguos
 *.sql
-
-# WordPress-specific files
-wp-content/uploads/
-wp-content/cache/
-wp-config.php.local
-
-# Editor files
-*.swp
-*.swo
-
-# Logs and temp files
-*.log
-*.tmp
-
-# OS files
-.DS_Store
-Thumbs.db
+backup_*.sql
